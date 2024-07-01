@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { getOrderComments, addComment, getUserOrders } from "../services/api";
+import { getOrderComments, addComment, getOrder } from "../services/api";
 import { AuthContext } from "../context/AuthContext";
 import "../styles/OrderDetails.css";
 
@@ -13,9 +13,8 @@ const OrderDetails = () => {
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
-      const orderData = await getUserOrders(user.token);
-      const selectedOrder = orderData.find((order) => order._id === orderId);
-      setOrder(selectedOrder);
+      const orderData = await getOrder(orderId, user.token);
+      setOrder(orderData);
     };
 
     const fetchComments = async () => {

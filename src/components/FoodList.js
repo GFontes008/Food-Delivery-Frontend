@@ -21,18 +21,16 @@ const FoodList = ({ onAddToCart }) => {
   return (
     <div className="food-list">
       <h2>Food List</h2>
-      <ul>
+      <div className="foodlist-container">
         {foods.map((food) => (
-          <li key={food._id} className="food-item">
-            <div>
-              <h3>{food.name}</h3>
-              <p>{food.description}</p>
-              <p>${food.price.toFixed(2)}</p>
-              <button onClick={() => onAddToCart(food)}>Add to Cart</button>
-            </div>
-          </li>
+          <div key={food._id} className="food-item">
+            <h3>{food.name}</h3>
+            <p>{food.description}</p>
+            <p className="price">${food.price.toFixed(2)}</p>
+            <button onClick={() => onAddToCart(food)}>Add to Cart</button>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

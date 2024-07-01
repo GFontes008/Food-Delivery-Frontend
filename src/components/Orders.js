@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { getUserOrders } from "../services/api";
+import { getUserOrders, clearUserOrders } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "../styles/Orders.css";
 
@@ -27,6 +27,17 @@ const Orders = () => {
     fetchOrders();
   }, [user, navigate]);
 
+  const handleClearHistory = async () => {
+    if (user) {
+      try {
+        await clearUserOrders(user.token);
+        setOrders([]);
+      } catch (error) {
+        console.error("Error clearing order history:", error);
+      }
+    }
+  };
+
   if (!user) {
     return <p>Please log in to check your orders.</p>;
   }
@@ -35,13 +46,21 @@ const Orders = () => {
     <div className="orders-container">
       <h2>Your Orders</h2>
       {orders.length > 0 ? (
-        <ul>
-          {orders.map((order) => (
-            <li key={order._id} onClick={() => navigate(`/order/${order._id}`)}>
-              Order #{order._id} - Total: ${order.totalPrice.toFixed(2)}
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul className="orders-list">
+            {orders.map((order) => (
+              <li
+                key={order._id}
+                onClick={() => navigate(`/order/${order._id}`)}
+              >
+                Order #{order._id} - Total: ${order.totalPrice.toFixed(2)}
+              </li>
+            ))}
+          </ul>
+          <button onClick={handleClearHistory} className="clear-history-button">
+            Clear Order History
+          </button>
+        </>
       ) : (
         <p>You have no orders.</p>
       )}

@@ -8,13 +8,14 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [orderConfirmed, setOrderConfirmed] = useState(false);
+  const deliveryFee = 10;
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("cart")) || [];
     setCartItems(items);
     const total = items.reduce(
       (sum, item) => sum + item.price * item.quantity,
-      10
+      deliveryFee
     );
     setTotalPrice(total);
   }, []);
@@ -49,7 +50,7 @@ const Cart = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCartItems));
     const total = updatedCartItems.reduce(
       (sum, item) => sum + item.price * item.quantity,
-      0
+      deliveryFee
     );
     setTotalPrice(total);
   };
@@ -69,6 +70,7 @@ const Cart = () => {
               </li>
             ))}
           </ul>
+          <h3>Delivery Fee: ${deliveryFee.toFixed(2)}</h3>
           <h3>Total: ${totalPrice.toFixed(2)}</h3>
           <button onClick={handleCheckout}>Checkout</button>
         </>

@@ -151,3 +151,19 @@ export const getComments = async (id) => {
     throw error;
   }
 };
+export const getOrder = async (orderId, token) => {
+  try {
+    const response = await axios.get(`${API_URL}/orders/${orderId}`, {
+      headers: {
+        "x-auth-token": token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error fetching order details:",
+      error.response ? error.response.data : error.message
+    );
+    throw error;
+  }
+};
