@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { getOrderComments, addComment, getOrder } from "../services/api";
+import { getOrder, getOrderComments, addComment } from "../services/api";
 import { AuthContext } from "../context/AuthContext";
 import "../styles/OrderDetails.css";
 
@@ -13,13 +13,21 @@ const OrderDetails = () => {
 
   useEffect(() => {
     const fetchOrderDetails = async () => {
-      const orderData = await getOrder(orderId, user.token);
-      setOrder(orderData);
+      try {
+        const orderData = await getOrder(orderId, user.token);
+        setOrder(orderData);
+      } catch (error) {
+        console.error("Error fetching order details:", error);
+      }
     };
 
     const fetchComments = async () => {
-      const commentsData = await getOrderComments(orderId);
-      setComments(commentsData);
+      try {
+        const commentsData = await getOrderComments(orderId);
+        setComments(commentsData);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
     };
 
     fetchOrderDetails();
@@ -28,10 +36,14 @@ const OrderDetails = () => {
 
   const handleAddComment = async () => {
     if (!commentText.trim()) return;
-    const commentData = { orderId, text: commentText };
-    const newComment = await addComment(commentData, user.token);
-    setComments([...comments, { ...newComment, user: { name: user.name } }]);
-    setCommentText("");
+    try {
+      const commentData = { orderId, text: commentText };
+      const newComment = await addComment(commentData, user.token);
+      setComments([...comments, { ...newComment, user: { name: user.name } }]);
+      setCommentText("");
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
   };
 
   if (!order) return <p>Loading...</p>;

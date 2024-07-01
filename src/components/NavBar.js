@@ -14,8 +14,8 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      <nav>
-        <ul className="left-menu">
+      <nav className="navbar-left">
+        <ul>
           <li>
             <Link to="/" style={{ color: "white", textDecoration: "none" }}>
               Home
@@ -51,24 +51,21 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <div className="right-menu">
-          {user ? (
-            <>
-              <span>Welcome, {user.name}</span>
-              <button onClick={handleLogout} className="logout-button">
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link
-              to="/login"
-              style={{ color: "white", textDecoration: "none" }}
-            >
-              Login
-            </Link>
-          )}
-        </div>
       </nav>
+      <div className="navbar-right">
+        {user ? (
+          <>
+            <span>Welcome, {user.name}</span>
+            <button onClick={handleLogout} className="logout-button">
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link to="/login" style={{ color: "white", textDecoration: "none" }}>
+            Login
+          </Link>
+        )}
+      </div>
     </div>
   );
 };
