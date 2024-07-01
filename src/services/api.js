@@ -151,6 +151,7 @@ export const getComments = async (id) => {
     throw error;
   }
 };
+
 export const getOrder = async (orderId, token) => {
   try {
     const response = await axios.get(`${API_URL}/orders/${orderId}`, {
@@ -162,6 +163,19 @@ export const getOrder = async (orderId, token) => {
   } catch (error) {
     console.error(
       "Error fetching order details:",
+      error.response ? error.response.data : error.message
+    );
+    throw error;
+  }
+};
+
+export const submitContactForm = async (formData) => {
+  try {
+    const response = await axios.post(`${API_URL}/contact`, formData);
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error submitting contact form:",
       error.response ? error.response.data : error.message
     );
     throw error;

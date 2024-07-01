@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { submitContactForm } from "../services/api";
 import { MdEmail } from "react-icons/md";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaFacebook, FaTwitter } from "react-icons/fa";
@@ -24,18 +24,15 @@ const ContactPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/contact",
-        formData
-      );
-      setMessage(response.data.message);
+      const response = await submitContactForm(formData);
+      setMessage(response.message);
       setFormData({
         name: "",
         email: "",
         message: "",
       });
     } catch (error) {
-      console.error("Error sending contact information:", error);
+      console.error("Error submitting contact form:", error);
       setMessage("Failed to send contact information. Please try again later.");
     }
   };
