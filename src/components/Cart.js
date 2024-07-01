@@ -14,7 +14,7 @@ const Cart = () => {
     setCartItems(items);
     const total = items.reduce(
       (sum, item) => sum + item.price * item.quantity,
-      0
+      10
     );
     setTotalPrice(total);
   }, []);
@@ -62,7 +62,10 @@ const Cart = () => {
           <ul>
             {cartItems.map((item) => (
               <li key={item._id}>
-                {item.name} - {item.quantity} x ${item.price.toFixed(2)}
+                <div>
+                  {item.name} - {item.quantity} x ${item.price.toFixed(2)}
+                </div>
+                <button onClick={() => handleDelete(item._id)}>Remove</button>
               </li>
             ))}
           </ul>

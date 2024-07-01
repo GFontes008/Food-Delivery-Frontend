@@ -1,58 +1,70 @@
-.food-list-container {
-  padding: 20px;
-  text-align: center;
-  background-image: url("../assets/images/foodbackground.jpg");
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-family: "Helvetica Neue", sans-serif;
+  background-color: #1e1e2f;
+  color: #333;
 }
 
-.food-list {
+.foodlist-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .food-item {
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 10px;
+  margin: 20px;
   padding: 20px;
-  width: 300px;
+  width: 200px;
   text-align: center;
-  transition: transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .food-item:hover {
   transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .food-item img {
-  max-width: 100%;
-  border-radius: 10px;
+  width: 100%;
+  border-radius: 15px;
 }
 
 .food-item h3 {
-  margin: 10px 0;
   font-size: 1.5em;
+  color: #ff6f61;
+  margin: 10px 0;
 }
 
 .food-item p {
+  font-size: 1em;
+  color: #666;
+}
+
+.food-item .price {
+  font-size: 1.2em;
   color: #333;
+  font-weight: bold;
 }
 
 .food-item button {
-  background-color: #e2be1f;
+  background-color: #ff6f61;
+  color: white;
   border: none;
   padding: 10px 20px;
-  color: #fff;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 1em;
+  margin-top: 10px;
 }
 
 .food-item button:hover {
-  background-color: #e49126;
-}
-
-.food-list-container h2 {
-  color: #eebe21;
+  background-color: #e65c50;
 }

@@ -1,5 +1,9 @@
 .order-details-container {
   padding: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: white;
 }
 
 .order-details-container ul {

@@ -20,12 +20,12 @@ const Home = () => {
       <div className="content">
         <div className="foodlist">
           <button>
-            <Link to="/foods">
+            <Link to="/foods" style={{ textDecoration: "none" }}>
               <img src="/path/to/your/foodlist/image.jpg" alt="Food List" />
             </Link>
           </button>
         </div>
-        <div className="cart">
+        <div className="cart" style={{ textDecoration: "none" }}>
           <button>
             <Link to="/cart">
               <img src="/path/to/your/cart/image.jpg" alt="Cart" />

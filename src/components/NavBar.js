@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { RiAccountPinCircleLine } from "react-icons/ri";
 import { AuthContext } from "../context/AuthContext";
 import "../styles/NavBar.css";
 
@@ -16,7 +15,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <nav>
-        <ul>
+        <ul className="left-menu">
           <li>
             <Link to="/" style={{ color: "white", textDecoration: "none" }}>
               Home
@@ -52,20 +51,21 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <div className="auth-section">
+        <div className="right-menu">
           {user ? (
             <>
-              <span>Welcome {user.name}</span>
+              <span>Welcome, {user.name}</span>
               <button onClick={handleLogout} className="logout-button">
                 Logout
               </button>
             </>
           ) : (
-            <>
-              <Link to="/login" className="auth-icon">
-                <RiAccountPinCircleLine />
-              </Link>
-            </>
+            <Link
+              to="/login"
+              style={{ color: "white", textDecoration: "none" }}
+            >
+              Login
+            </Link>
           )}
         </div>
       </nav>

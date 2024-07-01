@@ -1,10 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { MdEmail } from "react-icons/md";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaFacebook, FaTwitter } from "react-icons/fa";
 import "../styles/ContactPage.css";
 
 const ContactPage = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const [message, setMessage] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/contact",
+        formData
+      );
+      setMessage(response.data.message);
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Error sending contact information:", error);
+      setMessage("Failed to send contact information. Please try again later.");
+    }
+  };
+
   return (
     <div className="container">
       <div className="contact-form">
@@ -14,13 +49,15 @@ const ContactPage = () => {
           need. Whether you have a question or want to get in touch, just fill
           out the form below.
         </h5>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input
               type="text"
               id="name"
               name="name"
               placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
               required
             />
           </div>
@@ -30,6 +67,8 @@ const ContactPage = () => {
               id="email"
               name="email"
               placeholder="Your Email"
+              value={formData.email}
+              onChange={handleChange}
               required
             />
           </div>
@@ -38,11 +77,14 @@ const ContactPage = () => {
               id="message"
               name="message"
               placeholder="Your Message"
+              value={formData.message}
+              onChange={handleChange}
               required
             ></textarea>
           </div>
           <button type="submit">Send</button>
         </form>
+        {message && <p>{message}</p>}
       </div>
       <div className="customer-care">
         <h2>Customer Care</h2>
