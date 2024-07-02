@@ -26,7 +26,7 @@ const FoodList = ({ onAddToCart }) => {
           <div key={food._id} className="food-item">
             <h3>{food.name}</h3>
             <p>{food.description}</p>
-            <p className="price">${food.price.toFixed(2)}</p>
+            <p className="price">€{food.price.toFixed(2)}</p>
             <button onClick={() => onAddToCart(food)}>Add to Cart</button>
           </div>
         ))}

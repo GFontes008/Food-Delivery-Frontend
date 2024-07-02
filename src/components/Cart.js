@@ -70,8 +70,8 @@ const Cart = () => {
               </li>
             ))}
           </ul>
-          <h3>Delivery Fee: ${deliveryFee.toFixed(2)}</h3>
-          <h3>Total: ${totalPrice.toFixed(2)}</h3>
+          <h3>Delivery Fee: €{deliveryFee.toFixed(2)}</h3>
+          <h3>Total: €{totalPrice.toFixed(2)}</h3>
           <button onClick={handleCheckout}>Checkout</button>
         </>
       ) : (

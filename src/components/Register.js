@@ -1,81 +1,95 @@
 import React, { useState } from "react";
 import { register } from "../services/api";
 import { useNavigate } from "react-router-dom";
-import "../styles/Auth.css";
+import "../styles/Register.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    address: "",
+    address: "", // Add address field
   });
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     try {
-      await register(formData);
-      console.log(`User registered successfully: ${formData.email}`);
-      alert("User registered successfully!");
+      const response = await register(formData);
+      setMessage(response.message);
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        address: "", // Reset address field
+      });
       navigate("/login");
-    } catch (err) {
-      console.error(
-        "Registration failed:",
-        err.response ? err.response.data : err.message
-      );
-      setError(
-        err.response && err.response.data
-          ? err.response.data.msg
-          : "Registration failed. Please try again."
-      );
+    } catch (error) {
+      setMessage("Failed to register. Please try again later.");
     }
   };
 
   return (
-    <div className="auth-container">
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={onChange}
-          placeholder="Name"
-          required
-        />
-        <input
-          type="text"
-          name="address"
-          value={formData.address}
-          onChange={onChange}
-          placeholder="Address"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={onChange}
-          placeholder="Email"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={onChange}
-          placeholder="Password"
-          required
-        />
-        {error && <p className="error">{error}</p>}
-        <button type="submit">Register</button>
-      </form>
+    <div className="register-container">
+      <div className="register-form">
+        <h2>Create an Account</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Your Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Your Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              id="address"
+              name="address"
+              placeholder="Your Address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit">Register</button>
+        </form>
+        {message && <p>{message}</p>}
+      </div>
     </div>
   );
 };
