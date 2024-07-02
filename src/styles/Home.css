@@ -1,9 +1,13 @@
 .homepage {
-  background-color: #1e1e2f;
+  background-image: url(../assets/images/pngtree-3d-rendered-interface-for-a-homemade-food-app-pictur.png);
   color: white;
   text-align: center;
   padding: 20px;
   min-height: 100vh;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .title {
