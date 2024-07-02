@@ -15,14 +15,14 @@ const Home = () => {
         <div className="foodlist">
           <button>
             <Link to="/foods" style={{ textDecoration: "none" }}>
-              <img src="/path/to/your/foodlist/image.jpg" alt="Food List" />
+              Food List
             </Link>
           </button>
         </div>
-        <div className="cart" style={{ textDecoration: "none" }}>
+        <div className="cart">
           <button>
-            <Link to="/cart">
-              <img src="/path/to/your/cart/image.jpg" alt="Cart" />
+            <Link to="/cart" style={{ textDecoration: "none" }}>
+              Cart
             </Link>
           </button>
         </div>
