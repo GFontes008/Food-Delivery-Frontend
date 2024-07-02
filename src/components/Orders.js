@@ -53,7 +53,7 @@ const Orders = () => {
                 key={order._id}
                 onClick={() => navigate(`/order/${order._id}`)}
               >
-                Order #{order._id} - Total: ${order.totalPrice.toFixed(2)}
+                Order #{order._id} - Total: €{order.totalPrice.toFixed(2)}
               </li>
             ))}
           </ul>
