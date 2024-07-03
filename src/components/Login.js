@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { login } from "../services/api";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../styles/Auth.css";
 import motobike from "../assets/images/motobike.jpg";
 
@@ -72,7 +72,7 @@ const LoginPage = () => {
             </button>
           </form>
           <div className="register-link">
-            Don't have an account? <Link to="/register">Register here</Link> {}
+            Don't have an account? <Link to="/register">Register here</Link>
           </div>
           {error && <p className="error">{error}</p>}
         </div>
