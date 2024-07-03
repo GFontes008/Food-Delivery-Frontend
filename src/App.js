@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import NavBar from "./components/NavBar";
 import OrderDetails from "./components/OrderDetails";
 import ContactPage from "./components/ContactPage";
+import Footer from "./components/Footer";
 import "./App.css";
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path="/order/:orderId" element={<OrderDetails />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
+        <Footer />
       </Router>
     </AuthProvider>
   );
