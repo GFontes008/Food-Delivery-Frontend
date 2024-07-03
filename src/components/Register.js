@@ -8,7 +8,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    address: "", // Add address field
+    address: "",
   });
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const Register = () => {
         name: "",
         email: "",
         password: "",
-        address: "", // Reset address field
+        address: "",
       });
       navigate("/login");
     } catch (error) {
